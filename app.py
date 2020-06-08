@@ -4,7 +4,6 @@ from flask import Flask, render_template, jsonify
 import requests
 import json
 
-import numpy as np
 url = "http://flaskosa.herokuapp.com/cmd/"
 headers = {
     'content-type': "application/json",
@@ -14,12 +13,14 @@ headers = {
 
 app = Flask(__name__)
 
+# initial page
 @app.route('/')
 def hello_world():
     title = "OSA"
     name = "Welcome to cloud OSA!"
     return render_template('index.html', title=title, name=name)
 
+# the following 3 routes are used for the live graph
 @app.route('/api/start')
 def start():
     res = requests.request("GET", url + 'START', headers=headers)
@@ -34,6 +35,8 @@ def stop():
 def trace():
     return jsonify(requests.request("GET", url + 'TRACE', headers=headers).json())
 
+# the routes below are used for the query portion on the bottom half of the page
+# they can also be accessed by directly visiting localhost:8080/api/cmd or another desired route
 @app.route('/api/cmd')
 def cmd():
     return requests.request("GET", "http://flaskosa.herokuapp.com/cmd", headers=headers).text
@@ -42,11 +45,11 @@ def cmd():
 def query(section):
     return requests.request("GET", url + section.upper(), headers=headers).text
 
-@app.route('/api/cmd/echo/<section>')
+@app.route('/api/cmd/ECHO/<section>')
 def echo(section):
     return requests.request("GET", url + "ECHO/" + section, headers=headers).text
 
-@app.route('/api/cmd/limset/<s1>/<s2>')
+@app.route('/api/cmd/LIM/<s1>/<s2>')
 def limset(s1, s2):
     return requests.request("GET", url + "LIM/[%s,%s]"%(s1, s2), headers=headers).text
     

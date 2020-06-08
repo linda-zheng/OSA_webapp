@@ -1,3 +1,4 @@
+// options and chart contain the data and settings for the chart
 var options = {
     zoomEnabled: true,
     animationEnabled: true,
@@ -10,9 +11,9 @@ var options = {
     },
     data: [{ type: "line", dataPoints: [] }]
 };
-
 var chart = new CanvasJS.Chart("chartContainer", options);
 
+// graph() updates the data points on the graph
 function graph(d) {  
     chart.options.data[0].dataPoints = [];
     for (var i = 0 ; i < d.xdata.length; i++) {
@@ -21,6 +22,7 @@ function graph(d) {
     chart.render();
 };
 
+// getTrace() sends a request to retrieve a trace
 function getTrace(){
     $.ajax({
         type: 'GET',
@@ -40,6 +42,8 @@ $("#traceBtn").click(()=>{
 
 var interval;
 
+// send a request to notify the OSA to start
+// activate the interval to allow repeated acqusition
 $("#startBtn").click(()=>{
     $.ajax({
         type: 'GET',
@@ -52,6 +56,9 @@ $("#startBtn").click(()=>{
     });
 });
 
+// send a request to notify the OSA to stop
+// deactivate the interval
+// sometimes there are additional traces that may follow due to some lag
 $("#stopBtn").click(()=>{
     $.ajax({
         type: 'GET',
@@ -63,12 +70,13 @@ $("#stopBtn").click(()=>{
     });
 });
 
+// send a query based on the selected command
 $("#queryBtn").click(()=>{
     var queryType = $("#commands").val();
     if (queryType=="limset") {
         $.ajax({
             type: 'GET',
-            url: 'api/cmd/'+queryType+"/"+$("#inMin").val()+"/"+$("#inMax").val(),
+            url: 'api/cmd/LIM/'+$("#inMin").val()+"/"+$("#inMax").val(),
             success: (response)=>{
                 $('#result').text(JSON.stringify(response));
             }
@@ -76,7 +84,7 @@ $("#queryBtn").click(()=>{
     } else if (queryType=="echo"){
         $.ajax({
             type: 'GET',
-            url: 'api/cmd/'+queryType+"/"+$("#inQuery").val(),
+            url: 'api/cmd/'+queryType.toUpperCase()+"/"+$("#inQuery").val(),
             success: (response)=>{
                 $('#result').text(JSON.stringify(response));
             }
@@ -93,13 +101,15 @@ $("#queryBtn").click(()=>{
     else {
         $.ajax({
             type: 'GET',
-            url: 'api/cmd/'+queryType,
+            url: 'api/cmd/'+queryType.toUpperCase(),
             success: (response)=>{
                 $('#result').text(JSON.stringify(response));
             }
         });
     }
 });
+
+// display the correct input boxes depending on which query type is selected
 $("#commands").change(()=>{
     if ($("#commands").val() == "limset") {
         $("#inMin").show();
