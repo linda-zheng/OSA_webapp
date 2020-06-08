@@ -7,17 +7,33 @@ var options = {
     },
     axisY: {
         includeZero: false,
-        lineThickness: 1
+        title: "Signal [dBm]",
+        lineThickness: 1,
+        gridColor: "lightblue" ,
+        gridThickness: 2,
+        minimum: -80
     },
-    data: [{ type: "line", dataPoints: [] }]
+    axisX: {
+        includeZero: false,
+        title: "Wavelength [nm]",
+        lineThickness: 1,
+        gridColor: "lightblue" ,
+        gridThickness: 2,
+        minimum: 1515,
+        maximum: 1580
+    },
+    data: [{ type: "line", lineColor: "blue", markerType: "none", dataPoints: [] }]
 };
 var chart = new CanvasJS.Chart("chartContainer", options);
+window.onload = ()=>{
+    chart.render();
+};
 
 // graph() updates the data points on the graph
 function graph(d) {  
     chart.options.data[0].dataPoints = [];
     for (var i = 0 ; i < d.xdata.length; i++) {
-        chart.options.data[0].dataPoints.push({x:d.xdata[i], y:d.ydata[i]});   
+        chart.options.data[0].dataPoints.push({x:d.xdata[i]*1e9, y:d.ydata[i]});
     } 
     chart.render();
 };

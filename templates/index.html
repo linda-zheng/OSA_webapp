@@ -1,4 +1,10 @@
 <html>
+	<style>
+		button { padding: 8px 24px; }
+		input {	padding: 8px 30px; }
+		select { padding: 8px 30px; }
+		tab1 { padding-left: 4em; }
+	</style>
     <head>
         <title>{{title}} </title>
     </head>
@@ -6,15 +12,18 @@
         <!-- the first paragraph holds the contents of the live graph-->
         <p>
         <h1>{{name}}</h1>
-        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <div id="chartContainer" style="height: 400px; width: 60%; border: 5px outset grey;"></div>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <button id="startBtn">Start</button>
-        <button id="stopBtn">Stop</button>
+        <tab1></tab1> <BR> <BR> <tab1></tab1>
+        <button id="startBtn">Start</button> <tab1></tab1>
+        <button id="stopBtn">Stop</button> <tab1></tab1>
         <button id="traceBtn">Single</button>
         </p>
 
+        <BR>
         <!-- the second paragraph holds the contents of the query portion-->
         <p>
+            <tab1></tab1>
         <select id="commands" >
             <option value="cmd">Cmd</option>
             <option value="idn">IDN</option>
@@ -28,13 +37,17 @@
             <option value="state">State</option>
             <option value="trace">Trace</option>
         </select>
+            <tab1></tab1>
         <button id="queryBtn">Query</button>
         <br>
+            <tab1></tab1>
         <input type="text" id="inMin" style='display:none' placeholder="min..."/>
         <input type="text" id="inMax" style='display:none' placeholder="max..."/>
-        <br>
+        <br> <tab1></tab1>
         <input type="text" id="inQuery" style='display:none' placeholder="write anything..."/>
         </p>
+
+        <label for="response log">Response Log</label>
         <p id="result"></p>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
