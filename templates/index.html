@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>{{title}} </title>
+    </head>
+    <body>
+        <p>
+        <h1>{{name}}</h1>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="traceBtn">Single</button>
+        </p>
+        <p>
+        <select id="commands" >
+            <option value="cmd">Cmd</option>
+            <option value="idn">IDN</option>
+            <option value="lim">Lim</option>
+            <option value="limset">Limset</option>
+            <option value="echo">Echo</option>
+            <option value="ping">Ping</option>
+            <option value="start">Start</option>
+            <option value="stop">Stop</option>
+            <option value="single">Single</option>
+            <option value="state">State</option>
+            <option value="trace">Trace</option>
+        </select>
+        <button id="queryBtn">Query</button>
+        <br>
+        <input type="text" id="inMin" style='display:none' placeholder="min..."/>
+        <input type="text" id="inMax" style='display:none' placeholder="max..."/>
+        <br>
+        <input type="text" id="inQuery" style='display:none' placeholder="write anything..."/>
+        </p>
+        <p id="result"></p>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/static/js/query.js"></script>
+        
+    </body>
+</html>
