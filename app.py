@@ -33,7 +33,9 @@ def stop():
 
 @app.route('/api/trace')
 def trace():
-    return jsonify(requests.request("GET", url + 'TRACE', headers=headers).json())
+    res = requests.request("GET", url + 'TRACE', headers=headers).json()
+    print(len(res['xdata']))
+    return jsonify(res)
 
 # the routes below are used for the query portion on the bottom half of the page
 # they can also be accessed by directly visiting localhost:8080/api/cmd or another desired route

@@ -14,6 +14,7 @@ flask run
 
 ## Things to watch out for
 
+- For security reasons, I have separated the pyVISA code from the Flask app. Feel free to browse `pyVISA.py` to see how we can connect to local devices.
 - If you are making any changes or restarting the app, make sure to clear your browser's cache. On windows, you can use ```ctrl-shift-r``` to refresh the page and clear the cache.
 - There are alerts to help you debug. Whenever a faulty trace is received, an error alert should appear on your screen. Simply click ```ok``` and resume using the app.
 - Sometimes the retrieving the trace can take a while and cause delays. If this happens, wait for the traces to return before trying new commands. In the odd case that the traces are not being retrieved, try to refresh your page.
